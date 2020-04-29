@@ -1,18 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 const OrderForm = ({ personalInfo, changePersonalInfo }) => {
-  // const [info, setInfo] = useState({
-  //   name: "",
-  //   email: "",
-  //   phone: "",
-  //   city: "",
-  // });
   const handleChange = (e) => {
     changePersonalInfo({ name: e.target.name, value: e.target.value });
-    // setInfo({
-    //   ...info,
-    //   [e.target.name]: e.target.value,
-    // });
   };
   return (
     <form className="flex flex-col justify-center md:w-1/2 mx-auto">
