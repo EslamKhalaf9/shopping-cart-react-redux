@@ -8,29 +8,29 @@ shopping cart application made by reactjs with redux for state managemnt
 
 - [ ] Cart Features
 
-  -- [x] Add Items to Cart
+  - [x] Add Items to Cart
 
-  -- [x] Remove Items from Cart
+  - [x] Remove Items from Cart
 
-  -- [x] Get from client the item count
+  - [x] Get from client the item count
 
-  -- [ ] check out and display a form for the user to put his contact info
+  - [ ] check out and display a form for the user to put his contact info
 
 - [ ] Items Display
 
-  -- [x] Display all items available in the stock
+  - [x] Display all items available in the stock
 
-  -- [x] Filter Items by ite's categories
+  - [x] Filter Items by ite's categories
 
-  -- [ ] Search for items by its name
+  - [ ] Search for items by its name
 
 - [ ] Admin panel
 
-  --[ ] Add new Item
+  - [ ] Add new Item
 
-  --[ ] Edit Existing one
+  - [ ] Edit Existing one
 
-  --[ ] Remove Item
+  - [ ] Remove Item
 
 ### `npm start`
 
