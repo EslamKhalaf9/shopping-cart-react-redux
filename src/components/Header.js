@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <nav className="p-5 bg-white shadow-md fixed w-full flex justify-between top-0">
-      <h1 className="text-2xl">Shopping</h1>
+    <nav className="p-5 bg-white shadow-md fixed w-full flex sm:justify-between justify-center top-0">
+      <h1 className="text-2xl hidden sm:block">Shopping</h1>
       <ul className="flex">
         <li className="m-2">
           <Link to="/">Home</Link>

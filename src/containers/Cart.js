@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actions } from "../store";
+import CartItem from "../components/CartItem";
+import OrderForm from "../components/OrderForm";
 class Cart extends Component {
+  state = {
+    showForm: false,
+  };
   render() {
     const { items, totalPrice } = this.props.cart;
     return (
@@ -16,51 +21,44 @@ class Cart extends Component {
               <th className="text-center">X</th>
             </tr>
             {items.map((item) => (
-              <tr key={item.id} className="border my-2">
-                <td className="w-2/5">{item.itemTitle}</td>
-                <td>
-                  <input
-                    className="w-2/3"
-                    type="number"
-                    value={item.count}
-                    min="1"
-                    max="5"
-                    onChange={(e) => {
-                      this.props.changeCartItemCount(item, e.target.value);
-                      this.props.updateTotalPrice();
-                    }}
-                  />
-                </td>
-                <td>{item.price}</td>
-                <td className="w-1/5 text-center">
-                  <button
-                    className="text-red-600"
-                    onClick={() => {
-                      this.props.removeItemFromCart(item);
-                      this.props.updateTotalPrice();
-                    }}
-                  >
-                    x
-                  </button>
-                </td>
-              </tr>
+              <CartItem
+                key={item.id}
+                item={item}
+                removeItemFromCart={this.props.removeItemFromCart}
+                updateTotalPrice={this.props.updateTotalPrice}
+                changeCartItemCount={this.props.changeCartItemCount}
+              />
             ))}
           </tbody>
         </table>
         <p className="mt-5">Total Price: {totalPrice}</p>
+        {items.length && !this.state.showForm ? (
+          <button
+            className="bg-green-600 font-bold text-white rounded p-2 mt-5 block mx-auto"
+            onClick={() => this.setState({ showForm: true })}
+          >
+            Checkout
+          </button>
+        ) : (
+          ""
+        )}
+        {/* Form */}
+        {this.state.showForm ? (
+          <OrderForm
+            changePersonalInfo={this.props.changePersonalInfo}
+            personalInfo={this.props.personalInfo}
+          />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
 }
-
-// cart: {
-//   items: [{ itemTitle: "Towers Case", count: 2,      price: 1500 }],
-//   totalPrice: 3000,
-// },
-
 function mapStateToProps(state) {
   return {
     cart: state.cart,
+    personalInfo: state.personalInfo,
   };
 }
 
@@ -74,6 +72,9 @@ function mapActionsToProps(dispatch) {
     },
     changeCartItemCount(item, count) {
       dispatch(actions.changeCartItemCount(item, count));
+    },
+    changePersonalInfo(payload) {
+      dispatch(actions.changePersonalInfo(payload));
     },
   };
 }

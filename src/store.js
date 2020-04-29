@@ -2,6 +2,7 @@ const ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART";
 const REMOVE_iTEM_FROM_CART = "REMOVE_iTEM_FROM_CART";
 const UPADTE_TOTAL_PRICE = "UPADTE_TOTAL_PRICE";
 const CHANGE_CART_ITEM_COUNT = "CHANGE_CART_ITEM_COUNT";
+const CHANGE_PERSONAI_INFO = "CHANGE_PERSONAI_INFO";
 
 const initialState = {
   items: [
@@ -45,7 +46,7 @@ const initialState = {
     items: [],
     totalPrice: 0,
   },
-  personalInfo: { id: 1, name: "", phone: "", city: "" },
+  personalInfo: { name: "", phone: "", city: "", email: "" },
 };
 
 export const actions = {
@@ -71,6 +72,12 @@ export const actions = {
       type: CHANGE_CART_ITEM_COUNT,
       item,
       count,
+    };
+  },
+  changePersonalInfo(payload) {
+    return {
+      type: CHANGE_PERSONAI_INFO,
+      payload,
     };
   },
 };
@@ -129,7 +136,7 @@ export function reducer(state = initialState, action) {
       state.cart.items.forEach((item) => {
         if (item.id === action.item.id) {
           const [target] = state.items.filter(
-            (item) => item.id == action.item.itemID
+            (item) => item.id === action.item.itemID
           );
 
           item.count = action.count;
@@ -143,6 +150,18 @@ export function reducer(state = initialState, action) {
           ...state.cart,
           items: newCartItems,
         },
+      };
+    }
+    case CHANGE_PERSONAI_INFO: {
+      let newInfo = {
+        ...state.personalInfo,
+        [action.payload.name]: action.payload.value,
+      };
+      console.log();
+
+      return {
+        ...state,
+        personalInfo: newInfo,
       };
     }
     default:
